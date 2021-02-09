@@ -12,7 +12,7 @@ class BestSellingGames::CLI
     input = gets.strip.downcase
     if input == "1"
       puts "Here's a list of the best-selling video games of all time:"
-      BestSellingGames::Best.list
+      BestSellingGames::Best.best_list
     elsif input == "2"
       puts "Here's a list of the most-played video games of all time:"
     elsif input == "exit"
