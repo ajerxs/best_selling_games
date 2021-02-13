@@ -13,9 +13,12 @@ class BestSellingGames::Best
     doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_best-selling_video_games"))
     nu_array = []
     things = doc.css("table.wikitable tbody tr").each do |a|
-      nu_array << a
+      b = a.text
+      nu_array << b
     end
-    things
+    nu_array.shift
+    nu_array
+    # things.gsub(/\n/, ',')
   end
 
 end
