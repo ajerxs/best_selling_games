@@ -11,9 +11,11 @@ class BestSellingGames::Best
     @@all
   end
 
-  # def self.best_list
-    # will need this method eventually
-  #end
+  def self.best_list
+    @@all.each.with_index(1) do |game, i|
+      puts "#{i}. #{game.name}"
+    end
+  end
 
   def self.best_scrape
     doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_best-selling_video_games"))
@@ -40,7 +42,7 @@ class BestSellingGames::Best
       best.copies_sold = a[2]
       best.platform = a[3]
     end
-    binding.pry
+    @@all[49]
   end
 
 end
