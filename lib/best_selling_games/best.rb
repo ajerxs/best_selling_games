@@ -32,27 +32,29 @@ class BestSellingGames::Best
       @nu_array << b
     end
     @nu_array.shift
+    @nu_array.each do |d|
+      if d[0].to_i >= 1
+        d.shift
+      end
+    end
     @nu_array
   end
 
-  def self.best_array
-    @bst_array = []
-    self.first_array.each do |a|
-      a.each do |b|
-        c = b.gsub("\n", "")
-        @bst_array << c
-      end
-    end
-    @bst_array
-  end
+  # def self.best_array
+    # @bst_array = []
+    # self.first_array.each do |a|
+      # if a[0].to_i >= 1
+        # self.first
+    # end
+    # @bst_array
+  # end
 
   def self.make_best
-    self.best_array.each do |a|
+    self.first_array.each do |a|
       best = BestSellingGames::Best.new
-      best.rank = a[0]
-      best.name = a[1]
-      best.copies_sold = a[2]
-      best.platform = a[3]
+      best.name = a[0].gsub("\n", "")
+      best.copies_sold = a[1].gsub("\n", "")
+      best.platform = a[2].gsub("\n", "")
     end
     @@all[0]
   end
