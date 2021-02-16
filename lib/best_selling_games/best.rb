@@ -52,11 +52,11 @@ class BestSellingGames::Best
   def self.make_best
     self.first_array.each do |a|
       best = BestSellingGames::Best.new
-      best.name = a[0].gsub("\n", "")
-      best.copies_sold = a[1].gsub("\n", "")
-      best.platform = a[2].gsub("\n", "")
+      best.name = a[0].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best.copies_sold = a[1].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best.platform = a[2].gsub("\n", "").gsub(/\[[a-z]\]/, "")
     end
-    @@all[0]
+    @@all[50]
   end
 
 end
