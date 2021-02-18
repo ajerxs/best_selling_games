@@ -14,7 +14,8 @@ class BestSellingGames::CLI
       best_list
       find_best
     elsif input == "2"
-      puts "Here's a list of the most-played video games of all time:"
+      most_list
+      find_most
     elsif input == "exit"
       puts "See you later!"
     else
@@ -45,6 +46,32 @@ class BestSellingGames::CLI
       find_best
     elsif input == 0
       BestSellingGames::Best.reset
+      select_list
+    end
+  end
+
+  def most_list
+    puts "Here's a list of the most-played video games of all time:"
+    BestSellingGames::Most.all.each.with_index(1) do |game, i|
+      puts "#{i}. #{game.title}"
+    end
+    puts "If you would like more information on a game, type the number of its rank!"
+    puts "If you would like to go back, type the number '0'!"
+  end
+
+  def find_most
+    input = gets.strip.downcase.to_i
+    if input >= 1
+      puts "#{BestSellingGames::Most.all[input - 1].title.colorize(:red)}"
+      puts "  Player Count: #{BestSellingGames::Most.all[input - 1].number.colorize(:blue)}"
+      puts "  As of: #{BestSellingGames::Most.all[input - 1].as_of.colorize(:blue)}"
+      puts "  Business Model: #{BestSellingGames::Most.all[input - 1].model.colorize(:blue)}"
+      puts "  Release Date: #{BestSellingGames::Most.all[input - 1].release.colorize(:blue)}"
+      puts "  Publisher: #{BestSellingGames::Most.all[input - 1].publisher.colorize(:blue)}"
+      puts "Did you want to pick another game or go back?"
+      find_most
+    elsif input == 0
+      BestSellingGames::Most.reset
       select_list
     end
   end
