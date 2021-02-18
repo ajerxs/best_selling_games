@@ -32,6 +32,7 @@ class BestSellingGames::Bestscraper
       best.release = a[3].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       best.developer = a[4].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       best.publisher = a[5].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best
     end
   end
 
