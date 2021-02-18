@@ -23,28 +23,28 @@ class BestSellingGames::Best
 
   def self.best_array
     @nu_array = []
-    self.best_elements.each do |a|
-      b = a.text.split("\n\n")
-      @nu_array << b
+    self.best_elements.each do |element|
+      split = element.text.split("\n\n")
+      @nu_array << split
     end
     @nu_array.shift
-    @nu_array.each do |d|
-      if d[0].to_i >= 1
-        d.shift
+    @nu_array.each do |game|
+      if game[0].to_i >= 1
+        game.shift
       end
     end
     @nu_array
   end
 
   def self.make_best
-    self.best_array.each do |a|
+    self.best_array.each do |game|
       best = self.new
-      best.title = a[0].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      best.sales = a[1].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      best.platform = a[2].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      best.release = a[3].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      best.developer = a[4].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      best.publisher = a[5].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best.title = game[0].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best.sales = game[1].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best.platform = game[2].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best.release = game[3].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best.developer = game[4].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      best.publisher = game[5].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       @@all << best
     end
   end

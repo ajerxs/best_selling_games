@@ -23,23 +23,23 @@ class BestSellingGames::Most
 
   def self.most_array
     @nu_array = []
-    self.most_elements.each do |a|
-      b = a.text.split("\n\n")
-      @nu_array << b
+    self.most_elements.each do |element|
+      split = element.text.split("\n\n")
+      @nu_array << split
     end
     @nu_array.shift
     @nu_array
   end
 
   def self.make_most
-    self.most_array.each do |a|
+    self.most_array.each do |game|
       most = self.new
-      most.title = a[0].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      most.number = a[1].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      most.as_of = a[2].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      most.model = a[3].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      most.release = a[4].gsub("\n", "").gsub(/\[[a-z]\]/, "")
-      most.publisher = a[5].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      most.title = game[0].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      most.number = game[1].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      most.as_of = game[2].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      most.model = game[3].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      most.release = game[4].gsub("\n", "").gsub(/\[[a-z]\]/, "")
+      most.publisher = game[5].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       @@all << most
     end
   end
