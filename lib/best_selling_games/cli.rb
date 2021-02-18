@@ -35,19 +35,17 @@ class BestSellingGames::CLI
   def find_best
     input = gets.strip.downcase.to_i
     if input >= 1
-      puts "#{BestSellingGames::Best.all[input - 1].title}"
-      puts "  Copies Sold: #{BestSellingGames::Best.all[input - 1].sales}"
-      puts "  Platform: #{BestSellingGames::Best.all[input - 1].platform}"
-      puts "  Initial Release Date: #{BestSellingGames::Best.all[input - 1].release}"
-      puts "  Developer: #{BestSellingGames::Best.all[input - 1].developer}"
-      puts "  Publisher: #{BestSellingGames::Best.all[input - 1].publisher}"
+      puts "#{BestSellingGames::Best.all[input - 1].title.colorize(:red)}"
+      puts "  Copies Sold: #{BestSellingGames::Best.all[input - 1].sales.colorize(:blue)}"
+      puts "  Platform: #{BestSellingGames::Best.all[input - 1].platform.colorize(:blue)}"
+      puts "  Initial Release Date: #{BestSellingGames::Best.all[input - 1].release.colorize(:blue)}"
+      puts "  Developer: #{BestSellingGames::Best.all[input - 1].developer.colorize(:blue)}"
+      puts "  Publisher: #{BestSellingGames::Best.all[input - 1].publisher.colorize(:blue)}"
       puts "Did you want to pick another game or go back?"
       find_best
     elsif input == 0
       BestSellingGames::Best.reset
       select_list
-    else
-      puts "Sorry, I didn't quite get that!"
     end
   end
 
