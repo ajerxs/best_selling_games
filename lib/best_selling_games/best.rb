@@ -9,6 +9,10 @@ class BestSellingGames::Best
     @@all
   end
 
+  def self.reset
+    @@all.clear
+  end
+
   def self.best_scrape
     doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_best-selling_video_games"))
   end
@@ -42,13 +46,6 @@ class BestSellingGames::Best
       best.developer = a[4].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       best.publisher = a[5].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       @@all << best
-    end
-  end
-
-  def self.best_list
-    puts "Here's a list of the best-selling video games of all time:"
-    self.all.each.with_index(1) do |game, i|
-      puts "#{i}. #{game.title}"
     end
   end
 
