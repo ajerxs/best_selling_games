@@ -1,8 +1,6 @@
 # BestSellingGames
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/best_selling_games`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+BestSellingGames is a ruby gem that scrapes Wikipedia for the best-selling games of all time, as well as the most popular games of all time.
 
 ## Installation
 
