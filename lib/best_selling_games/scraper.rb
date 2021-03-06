@@ -1,26 +1,33 @@
 class BestSellingGames::Scraper
 
-  attr_accessor :type
-
   @@best = []
   @@most = []
 
   def self.scrape_games(type, url)
     doc = Nokogiri::HTML(open(url))
-    table = doc.css("table.wikitable tbody tr")
-    table.each do |element|
+    @table = doc.css("table.wikitable tbody tr")
+    if type == "best"
+      self.add_best
+    elsif type == "most"
+      self.add_most
+    end
+  end
+
+  def self.add_best
+    @table.each do |element|
       split = element.text.split("\n\n")
-      if type = best
-        @@best << split
-      elsif type = most
-        @@most << split
+      @@best << split
+    end
+    @@best.shift
+    @@best.each do |game|
+      if game[0].to_i >= 1
+        game.shift
       end
     end
-    if type = best
-      @@best.shift
-    elsif type = most
-      @@most.shift
-    end
+  end
+
+  def self.add_most
+
   end
 
   def self.best

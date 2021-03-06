@@ -14,6 +14,7 @@ class BestSellingGames::Game
       best.developer = game[4].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       best.publisher = game[5].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       @@best_games << best
+    end
   end
 
   def self.make_most
@@ -26,9 +27,11 @@ class BestSellingGames::Game
       most.release = game[4].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       most.publisher = game[5].gsub("\n", "").gsub(/\[[a-z]\]/, "")
       @@most_games << most
+    end
   end
 
   def self.best_games
+    self.make_best
     @@best_games
   end
 

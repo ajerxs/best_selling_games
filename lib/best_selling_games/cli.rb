@@ -11,8 +11,8 @@ class BestSellingGames::CLI
     puts "2. Most-Played Video Games by Player Count"
     input = gets.strip.downcase
     if input == "1"
+      best
       best_list
-      find_best
     elsif input == "2"
       most_list
       find_most
@@ -24,9 +24,14 @@ class BestSellingGames::CLI
     end
   end
 
+  def best
+    BestSellingGames::Scraper.scrape_games("best", "https://en.wikipedia.org/wiki/List_of_best-selling_video_games")
+    BestSellingGames::Scraper.best
+  end
+
   def best_list
     puts "Here's a list of the best-selling video games of all time in order of sales:"
-    BestSellingGames::Best.all.each.with_index(1) do |game, i|
+    BestSellingGames::Game.best_games.each.with_index(1) do |game, i|
       puts "#{i}. #{game.title}"
     end
     puts "If you would like more information on a game, type the number of its rank!"
