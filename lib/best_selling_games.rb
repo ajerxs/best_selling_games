@@ -1,7 +1,5 @@
 require_relative "./best_selling_games/version"
 require_relative "./best_selling_games/cli"
-require_relative "./best_selling_games/best"
-require_relative "./best_selling_games/most"
 require_relative "./best_selling_games/scraper"
 require_relative "./best_selling_games/game"
 
