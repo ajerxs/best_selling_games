@@ -3,6 +3,7 @@ class BestSellingGames::CLI
   def call
     puts "Let's look for some popular games!"
     best
+    most
     select_list
   end
 
@@ -43,11 +44,11 @@ class BestSellingGames::CLI
     input = gets.strip.downcase.to_i
     if input >= 1
       puts "#{BestSellingGames::Game.best_games[input - 1].title.colorize(:red)}"
-      puts "  Copies Sold: #{BestSellingGames::Best.all[input - 1].sales.colorize(:blue)}"
-      puts "  Platform: #{BestSellingGames::Best.all[input - 1].platform.colorize(:blue)}"
-      puts "  Initial Release Date: #{BestSellingGames::Best.all[input - 1].release.colorize(:blue)}"
-      puts "  Developer: #{BestSellingGames::Best.all[input - 1].developer.colorize(:blue)}"
-      puts "  Publisher: #{BestSellingGames::Best.all[input - 1].publisher.colorize(:blue)}"
+      puts "  Copies Sold: #{BestSellingGames::Game.best_games[input - 1].sales.colorize(:blue)}"
+      puts "  Platform: #{BestSellingGames::Game.best_games[input - 1].platform.colorize(:blue)}"
+      puts "  Initial Release Date: #{BestSellingGames::Game.best_games[input - 1].release.colorize(:blue)}"
+      puts "  Developer: #{BestSellingGames::Game.best_games[input - 1].developer.colorize(:blue)}"
+      puts "  Publisher: #{BestSellingGames::Game.best_games[input - 1].publisher.colorize(:blue)}"
       puts "Did you want to pick another game or go back?"
       find_best
     elsif input == 0
@@ -56,9 +57,14 @@ class BestSellingGames::CLI
     end
   end
 
+  def most
+    BestSellingGames::Scraper.scrape_games("most", "https://en.wikipedia.org/wiki/List_of_most-played_video_games_by_player_count")
+    BestSellingGames::Scraper.most
+  end
+
   def most_list
     puts "Here's a list of the most-played video games of all time:"
-    BestSellingGames::Most.all.each.with_index(1) do |game, i|
+    BestSellingGames::Game.most_games.each.with_index(1) do |game, i|
       puts "#{i}. #{game.title}"
     end
     puts "If you would like more information on a game, type the number of its rank!"
@@ -68,16 +74,16 @@ class BestSellingGames::CLI
   def find_most
     input = gets.strip.downcase.to_i
     if input >= 1
-      puts "#{BestSellingGames::Most.all[input - 1].title.colorize(:red)}"
-      puts "  Player Count: #{BestSellingGames::Most.all[input - 1].number.colorize(:blue)}"
-      puts "  As of: #{BestSellingGames::Most.all[input - 1].as_of.colorize(:blue)}"
-      puts "  Business Model: #{BestSellingGames::Most.all[input - 1].model.colorize(:blue)}"
-      puts "  Release Date: #{BestSellingGames::Most.all[input - 1].release.colorize(:blue)}"
-      puts "  Publisher: #{BestSellingGames::Most.all[input - 1].publisher.colorize(:blue)}"
+      puts "#{BestSellingGames::Game.most_games[input - 1].title.colorize(:red)}"
+      puts "  Player Count: #{BestSellingGames::Game.most_games[input - 1].number.colorize(:blue)}"
+      puts "  As of: #{BestSellingGames::Game.most_games[input - 1].as_of.colorize(:blue)}"
+      puts "  Business Model: #{BestSellingGames::Game.most_games[input - 1].model.colorize(:blue)}"
+      puts "  Release Date: #{BestSellingGames::Game.most_games[input - 1].release.colorize(:blue)}"
+      puts "  Publisher: #{BestSellingGames::Game.most_games[input - 1].publisher.colorize(:blue)}"
       puts "Did you want to pick another game or go back?"
       find_most
     elsif input == 0
-      BestSellingGames::Most.reset
+      BestSellingGames::Game.reset
       select_list
     end
   end
