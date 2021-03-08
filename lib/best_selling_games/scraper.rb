@@ -27,7 +27,12 @@ class BestSellingGames::Scraper
   end
 
   def self.add_most
-
+    @table.each do |game|
+      split = game.text.split("\n\n")
+      @@most << split
+    end
+    @@most.shift
+    @@most
   end
 
   def self.best

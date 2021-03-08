@@ -36,7 +36,13 @@ class BestSellingGames::Game
   end
 
   def self.most_games
+    self.make_most
     @@most_games
+  end
+
+  def self.reset
+    @@best_games.clear
+    @@most_games.clear
   end
 
 end

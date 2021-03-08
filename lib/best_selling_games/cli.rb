@@ -2,6 +2,7 @@ class BestSellingGames::CLI
 
   def call
     puts "Let's look for some popular games!"
+    best
     select_list
   end
 
@@ -11,8 +12,8 @@ class BestSellingGames::CLI
     puts "2. Most-Played Video Games by Player Count"
     input = gets.strip.downcase
     if input == "1"
-      best
       best_list
+      find_best
     elsif input == "2"
       most_list
       find_most
@@ -41,7 +42,7 @@ class BestSellingGames::CLI
   def find_best
     input = gets.strip.downcase.to_i
     if input >= 1
-      puts "#{BestSellingGames::Best.all[input - 1].title.colorize(:red)}"
+      puts "#{BestSellingGames::Game.best_games[input - 1].title.colorize(:red)}"
       puts "  Copies Sold: #{BestSellingGames::Best.all[input - 1].sales.colorize(:blue)}"
       puts "  Platform: #{BestSellingGames::Best.all[input - 1].platform.colorize(:blue)}"
       puts "  Initial Release Date: #{BestSellingGames::Best.all[input - 1].release.colorize(:blue)}"
@@ -50,7 +51,7 @@ class BestSellingGames::CLI
       puts "Did you want to pick another game or go back?"
       find_best
     elsif input == 0
-      BestSellingGames::Best.reset
+      BestSellingGames::Game.reset
       select_list
     end
   end
